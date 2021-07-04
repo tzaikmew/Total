@@ -4,6 +4,7 @@
 2. proxiesIP.txt需要先内置可使用的代理IP，否则依然报错，无法使用
 
 [快速跳转至脚本详细界面](https://github.com/tzaikmew/DDoS-Total/blob/main/CC/CC.py)
+
 [点此快速了解CC攻击的原理](https://github.com/tzaikmew/DDoS-Total/tree/main/DDoS%E5%8E%9F%E7%90%86%E7%9A%84%E4%BB%8B%E7%BB%8D%20%20)
 
 >> 插个小广告~
