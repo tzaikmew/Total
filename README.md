@@ -6,4 +6,5 @@
 [快速跳转至脚本详细界面](https://github.com/tzaikmew/DDoS-Total/blob/main/CC/CC.py)
 
 >> 插个小广告~
+
 > [点此快速获取VPN](https://4m.cn/M8zzh)，买个VPN支持一下叭~
